@@ -35,8 +35,7 @@ const actions = {
 
     async updateTodo({ commit }, updTodo) {
         const response = await axios.put(`https://jsonplaceholder.typicode.com/todos/${updTodo.id}`, updTodo);
-        console.log(response.data);
-        commit('updTodo', response.data);
+        commit('updateTodo', response.data);
     }
 
 };
@@ -45,8 +44,8 @@ const mutations = {
     setTodos: (state, todos) => (state.todos = todos),
     newTodo: (state, todo) => state.todos.unshift(todo),
     removeTodo: (state, id) => state.todos = state.todos.filter(todo => todo.id !== id),
-    updTodo: (state, updTodo) => {
-        const index = state.todos.findIndex(todo => todo.id = updTodo.id);
+    updateTodo: (state, updTodo) => {
+        const index = state.todos.findIndex(todo => todo.id === updTodo.id);
         if (index !== -1) {
             state.todos.splice(index, 1, updTodo);
         }
